@@ -59,6 +59,6 @@ end
 gem 'devise'
 #Abraham Kuri
 gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
-gem 'furatto', '~> 1.3.7'
+gem 'furatto', github: "IcaliaLabs/furatto-rails"
 gem 'font-awesome-rails'
 gem 'simple_form'
