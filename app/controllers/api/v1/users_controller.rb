@@ -1,6 +1,12 @@
 class Api::V1::UsersController < ApplicationController
   respond_to :json
 
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    head 204
+  end
+
   def show
     respond_with User.find(params[:id])
   end
@@ -23,12 +29,6 @@ class Api::V1::UsersController < ApplicationController
     render json: { errors: user.errors }, status: 422
   end
   
-  def destroy
-  user = User.find(params[:id])
-  user.destroy
-  head 204
-  end
-
 end
 
   private
