@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe Api::V1::ProductsController do
+
   describe "GET #show" do
-    before(:each) do
+    before(:each) do 
       @product = FactoryGirl.create :product
       get :show, id: @product.id
     end
@@ -16,7 +17,6 @@ describe Api::V1::ProductsController do
       product_response = json_response[:product]
       expect(product_response[:user][:email]).to eql @product.user.email
     end
-
 
     it { should respond_with 200 }
   end
@@ -64,15 +64,12 @@ describe Api::V1::ProductsController do
 
   end
 
-
-
-
   describe "POST #create" do
     context "when is successfully created" do
       before(:each) do
         user = FactoryGirl.create :user
         @product_attributes = FactoryGirl.attributes_for :product
-        api_authorization_header user.auth_token
+        api_authorization_header user.auth_token 
         post :create, { user_id: user.id, product: @product_attributes }
       end
 
@@ -86,9 +83,9 @@ describe Api::V1::ProductsController do
 
     context "when is not created" do
       before(:each) do
-        user = FactoryGirl.create :user
-        @invalid_product_attributes = { title: "Smart TV", price: "Twelve dollars" }
-        api_authorization_header user.auth_token
+        user = FactoryGirl.create :user 
+        @invalid_product_attributes = { title: "Smart TV", price: "Twelve dollars" } #notice I'm not including the email
+        api_authorization_header user.auth_token 
         post :create, { user_id: user.id, product: @invalid_product_attributes }
       end
 
@@ -106,17 +103,16 @@ describe Api::V1::ProductsController do
     end
   end
 
-    describe "PUT/PATCH #update" do
+  describe "PUT/PATCH #update" do
     before(:each) do
       @user = FactoryGirl.create :user
       @product = FactoryGirl.create :product, user: @user
-      api_authorization_header @user.auth_token
+      api_authorization_header @user.auth_token 
     end
 
     context "when is successfully updated" do
       before(:each) do
-        patch :update, { user_id: @user.id, id: @product.id,
-              product: { title: "An expensive TV" } }
+        patch :update, { user_id: @user.id, id: @product.id, product: { title: "An expensive TV" } }
       end
 
       it "renders the json representation for the updated user" do
@@ -129,8 +125,7 @@ describe Api::V1::ProductsController do
 
     context "when is not updated" do
       before(:each) do
-        patch :update, { user_id: @user.id, id: @product.id,
-              product: { price: "two hundred" } }
+        patch :update, { user_id: @user.id, id: @product.id, product: { price: "two hundred" } }
       end
 
       it "renders an errors json" do
@@ -146,16 +141,16 @@ describe Api::V1::ProductsController do
       it { should respond_with 422 }
     end
   end
-  
+
   describe "DELETE #destroy" do
     before(:each) do
       @user = FactoryGirl.create :user
       @product = FactoryGirl.create :product, user: @user
-      api_authorization_header @user.auth_token
+      api_authorization_header @user.auth_token 
       delete :destroy, { user_id: @user.id, id: @product.id }
     end
 
     it { should respond_with 204 }
   end
-end
 
+end
