@@ -63,5 +63,7 @@ gem 'devise'
 #Abraham Kuri
 gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
 gem 'furatto', github: "IcaliaLabs/furatto-rails"
+gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
+
 gem 'font-awesome-rails'
 gem 'simple_form'
