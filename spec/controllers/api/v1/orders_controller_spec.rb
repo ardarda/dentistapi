@@ -33,7 +33,8 @@ describe Api::V1::OrdersController do
 
 	  it "includes the products on the order" do
 	    order_response = json_response[:order]
-	    expect(order_response[:products]).to have(1).item
+	    # expect(order_response[:products]).to have(1).item
+	    expect(order_response[:products].size).to eq(1)
 	  end
 
 
