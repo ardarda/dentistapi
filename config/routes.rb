@@ -11,11 +11,12 @@ Rails.application.routes.draw do
     #We are going to list our resources here
     resources :users, :only => [:show, :create, :update, :destroy] do
       resources :products, :only => [:create, :update, :destroy]
+      resources :orders, :only => [:index, :show, :create]
+
     end
 
     resources :sessions, :only => [:create, :destroy]
     resources :products, :only => [:show, :index]
-    resources :orders, :only => [:index, :show, :create]
     end
   end
 end
