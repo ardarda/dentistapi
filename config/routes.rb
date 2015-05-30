@@ -2,6 +2,7 @@ require 'api_constraints'
 
 Rails.application.routes.draw do
   
+  devise_for :doctors
   mount SabisuRails::Engine => "/sabisu_rails"
   devise_for :users
   #Api definition
@@ -14,6 +15,16 @@ Rails.application.routes.draw do
       resources :orders, :only => [:index, :show, :create]
 
     end
+
+    resources :doctors do #/doctors/appointments
+      resources :appointments, :only => [:index, :show, :create, :update, :destroy]
+    end
+
+    resources :users do #/users/appointments
+      resources :appointments, :only => [:index, :show, :create, :update, :destroy]
+    end
+    
+    resources :appointments, :only => [:index, :show, :create, :update, :destroy]
 
     resources :sessions, :only => [:create, :destroy]
     resources :products, :only => [:show, :index]
